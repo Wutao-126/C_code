@@ -1,7 +1,10 @@
 # define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<assert.h>
+
+
 //strlen的实现
+//(非递归)
 //int my_strlen(const char* str)
 //{
 //	assert(str);
@@ -12,6 +15,8 @@
 //	}
 //		return count;
 //}
+//
+//递归
 //int my_strlen1(const char* str)
 //{
 //	assert(str);
