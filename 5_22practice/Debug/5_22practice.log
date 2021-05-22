@@ -1,0 +1,4 @@
+﻿  test.c
+E:\Code(githup)\C_code\5_22practice\test.c(124,2): warning C4033: “fun”必须返回值
+E:\Code(githup)\C_code\5_22practice\test.c(125): warning C4716: “fun”: 必须返回一个值
+  5_22practice.vcxproj -> E:\Code(githup)\C_code\5_22practice\Debug\5_22practice.exe
