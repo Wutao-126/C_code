@@ -1,0 +1,4 @@
+﻿  test.c
+E:\Code(githup)\C_code\5_26practice\test.c(63,12): error C2017: 非法的转义序列
+E:\Code(githup)\C_code\5_26practice\test.c(63,13): error C2146: 语法错误: 缺少“)”(在标识符“n”的前面)
+E:\Code(githup)\C_code\5_26practice\test.c(63,14): error C2059: 语法错误:“)”
