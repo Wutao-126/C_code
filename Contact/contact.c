@@ -3,18 +3,38 @@
 
 void Initcontact(struct Contact* ps)
 {
-	memset(ps->date, 0, sizeof(ps->date));
-	ps->size = 0;//设置通讯录最初只有0个元素
+	ps->date = (struct PeoInfo*)malloc(DEFAULT_SZ * sizeof(struct PeoInfo));
+	if (ps->date == NULL)
+	{
+		return ;
+	}
+	ps->size = 0;
+	ps->capacity = DEFAULT_SZ;
 }
-
+void CheckCapacity(struct Contact* ps)
+{
+	if (ps->size == ps->capacity )
+	{
+		struct PeoInfo* ptr = (struct PeoInfo*)realloc(ps->date, (ps->capacity + 2) * sizeof(PeoInfo));
+		if (ptr != NULL)
+		{
+			ps->date  = ptr;
+			ps->capacity += 2;
+			printf("增容成功\n");
+		}
+		else
+		{
+			printf("增容失败\n");
+		}
+	}
+}
 void Addcontact(struct Contact* ps)
 {
-	if (ps->size == MAX)
-	{
-		printf("通讯录已满，无法增加");
-	}
-	else
-	{
+	//检测当前通讯录的容量
+	//1.如果满了就增加空间
+	//2.如果不满，就不变
+	CheckCapacity(ps);
+	//增加数组
 		printf("请输入姓名:>");
 		scanf("%s", ps->date[ps->size].name);
 		printf("请输入电话:>");
@@ -28,7 +48,6 @@ void Addcontact(struct Contact* ps)
 
 		ps->size++;
 		printf("添加成功\n");
-	}
 }
 
 void ShowContact(const struct Contact* ps)
@@ -55,14 +74,14 @@ void ShowContact(const struct Contact* ps)
 	}
 }
 
-static int FindbyName(struct Contact* ps, char* name[MAX_NAME])
+static int FindbyName(struct Contact* ps, char* name)
 {
 	int i = 0;
 	for (i = 0; i < ps->size; i++)
 	{
 		if (0 == strcmp(ps->date[i].name, name))
 		{
-			return i;
+			return 1;
 		}
 	}
 	return -1;
@@ -71,11 +90,12 @@ static int FindbyName(struct Contact* ps, char* name[MAX_NAME])
 
 void Delcontact( struct Contact* ps)
 {
+	int pos = 0;
 	char name[MAX_NAME];
 	printf("请输入要删除人的名字:>");
 	scanf("%s", name);
 	//1.查找要删除的人的位置
-	int pos = FindbyName(ps, name);
+	 pos = FindbyName(ps, name);
 	//找到了返回名字所在元素的下标
 	//找不到返回-1；
 	if (pos==-1)
@@ -98,10 +118,11 @@ void Delcontact( struct Contact* ps)
 
 void Search(const struct Contact* ps)
 {
+	int pos = 0;
 	char name[MAX_NAME];
 	printf("请输入要查找人的名字:>");
 	scanf("%s", name);
-	int pos = FindbyName(ps, name);
+	pos = FindbyName( ps, name);
 	if (pos==-1)
 	{
 		printf("无此联系人");
@@ -154,4 +175,10 @@ int com_name(const void* a, const void* b)
 void SortContact(const struct Contact* ps)
 {
 	qsort(ps->date, ps->size, sizeof(ps->date[0]), com_name);
+}
+
+void DestroyContact(Contact* ps)
+{
+	free(ps->date);
+	ps->date = NULL;
 }
