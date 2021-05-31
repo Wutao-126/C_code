@@ -170,7 +170,7 @@ void ModifyContact(struct Contact* ps)
 
 int com_name(const void* a, const void* b)
 {
-	return strcmp(((struct Contact*)a)->date ->name , ((struct Contact*)b)->date ->name );
+	return strcmp(((PeoInfo*)a)->name , ((PeoInfo*)b)->name );
 }
 void SortContact(const struct Contact* ps)
 {
