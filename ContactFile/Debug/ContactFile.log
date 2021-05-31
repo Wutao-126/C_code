@@ -1,0 +1,3 @@
+﻿  contact.c
+E:\Code(githup)\C_code\ContactFile\contact.c(147,22): warning C4090: “函数”: 不同的“const”限定符
+  ContactFile.vcxproj -> E:\Code(githup)\C_code\ContactFile\Debug\ContactFile.exe
